@@ -1,0 +1,903 @@
+html {
+	scroll-behavior: smooth;
+}
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+* {
+	box-sizing: border-box;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+a {
+	text-decoration: none;
+}
+ul,
+li {
+	list-style-type: none;
+}
+$colorWhite: #fff;
+$colorBlack: #333333;
+
+// レイアウト幅
+$layout-width-inner: 900px;
+
+// ブレークポイント
+$breakpoints: (
+	"sp": "screen and (max-width: 675px)",
+	"tab": "screen and (max-width: #{$layout-width-inner - 1px})",
+	"pc": "screen and (min-width: #{$layout-width-inner})",
+);
+// mixinの設定
+// メディアクエリー
+@mixin mq($breakpoint: sp) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+@mixin btn {
+	width: 100%;
+	max-width: 155px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 0px 3px 6px #00000029;
+	opacity: 1;
+	padding: 7px 36px 10px 35px;
+	line-height: 20px;
+	display: inline-block;
+	cursor: pointer;
+	background: transparent linear-gradient(90deg, #fa41cc 0%, #6020b0 100%) 0% 0%
+		no-repeat padding-box;
+}
+@mixin inner {
+	max-width: 1022px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+@mixin heading {
+	font-size: 2rem;
+	text-align: center;
+	color: $colorBlack;
+}
+@mixin lead {
+	font-size: 1rem;
+	line-height: 24px;
+	color: #3ba6c9;
+	font-weight: bold;
+}
+
+@mixin form-label {
+	background-color: #0c449b;
+	color: $colorWhite;
+	border-radius: 10px;
+	font-size: 0.875rem;
+	line-height: 26px;
+	padding: 4px 16px 6px;
+}
+
+// header
+.header {
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+	width: 100%;
+	box-shadow: 0px 3px 6px #00000029;
+	height: 94px;
+	line-height: 94px;
+	background-color: $colorWhite;
+	& .header-inner {
+		@include inner;
+
+		@include mq("tab") {
+			padding: 0 20px;
+		}
+		@include mq("sp") {
+		}
+	}
+	& .header-nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		& .header-logo-link {
+			display: inline-block;
+			color: $colorBlack;
+			& .header-logo {
+				height: 94px;
+				display: flex;
+				align-items: center;
+
+				& .header-image {
+					width: 47px;
+					height: 47px;
+				}
+				& .logo-name {
+					font-size: 1.5rem;
+					font-weight: bold;
+					margin-left: 16px;
+					line-height: 35px;
+
+					@include mq("sp") {
+						font-size: 1.2rem;
+					}
+				}
+			}
+		}
+		& .nav-lists {
+			width: 30%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			@include mq("tab") {
+				display: none;
+			}
+
+			& .nav-link {
+				display: inline-block;
+				color: $colorBlack;
+				font-size: 1rem;
+				margin-right: 46px;
+				font-weight: bold;
+				@include mq("sp") {
+					margin-right: 23px;
+					font-size: 0.9rem;
+				}
+			}
+			& .link3 {
+				margin-right: 0;
+			}
+		}
+		& .nav-btn {
+			@include btn;
+			@include mq("tab") {
+				display: none;
+			}
+			& .nav-btn-link {
+				font-size: 0.875rem;
+				color: $colorWhite;
+			}
+		}
+	}
+}
+// ハンバーガーメニュー
+.button {
+	display: inline-block;
+	text-decoration: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.hamburger {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 3;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid #000;
+	box-shadow: 0 0 2rem transparent;
+	outline: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0.5rem rgba(161, 161, 161, 0.5);
+	}
+	@include mq("pc") {
+		display: none;
+	}
+	@include mq("tab") {
+		display: block;
+	}
+}
+// ﾊﾝﾊﾞｰｶﾞｰﾒﾆｭｰﾎﾞｰﾀﾞｰ線
+.hamburger__line {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	width: 18px;
+	height: 2px;
+	background-color: $colorBlack;
+	-webkit-transition: inherit;
+	transition: inherit;
+	&::before,
+	&::after {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-color: inherit;
+		content: "";
+		-webkit-transition: inherit;
+		transition: inherit;
+	}
+}
+.hamburger__line::before {
+	top: -5px;
+}
+.hamburger__line::after {
+	top: 5px;
+}
+// ボタンクリック時の属性変化からのｱｲｺﾝ動作
+.hamburger[aria-expanded="true"] {
+	border: 1px solid #fff !important;
+	z-index: 5;
+}
+.hamburger[aria-expanded="true"] .hamburger__line {
+	background-color: transparent;
+	&::before,
+	&::after {
+		top: 0;
+		background-color: $colorWhite;
+	}
+}
+.hamburger[aria-expanded="true"] .hamburger__line::before {
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] .hamburger__line::after {
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+// 動作終わり
+// ドロワーメニュー
+.drawer-background {
+	position: fixed;
+	z-index: 3;
+	width: 100vw;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	height: 100vh;
+	background-color: #000;
+	color: #fff;
+	visibility: hidden;
+	opacity: 0;
+}
+.is-drawerActive {
+	& .sp-global-menu {
+		transform: translateX(0px);
+		transition: 0.3s;
+		padding-top: 10%;
+		text-align: center;
+		@include mq("sp") {
+			padding-top: 30%;
+		}
+		& .global-list {
+			color: $colorWhite;
+		}
+	}
+	& .drawer-background {
+		visibility: visible;
+		opacity: 0.8;
+		transition: 0.3s;
+	}
+}
+// ハンバーガーメニュー表示リスト
+.sp-global-menu {
+	position: fixed;
+	width: 30vw;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	height: 100vh;
+	background-color: #000;
+	color: #fff;
+	transform: translateX(30vw);
+	transition: 0.3s;
+	opacity: 1;
+	z-index: 4;
+}
+// main
+.main-wrapper {
+	position: relative;
+	background-image: url(../img/circle.png);
+	background-repeat: no-repeat;
+	background-position: top 0px right 160px;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	& .main-inner {
+		@include inner;
+		padding-top: 159px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		@include mq("tab") {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		@include mq("sp") {
+			flex-direction: column;
+			padding-top: 50px;
+		}
+	}
+	& .main-content {
+		width: 50%;
+		@include mq("sp") {
+			width: 100%;
+			text-align: center;
+		}
+		& .main-ttl {
+			@include heading;
+			text-align: left;
+			line-height: 46px;
+			@include mq("sp") {
+				font-size: 1.8rem;
+				text-align: center;
+			}
+		}
+		& .main-lead {
+			@include lead;
+			color: $colorBlack;
+			padding: 44px 0 45px;
+		}
+		& .nav-btn {
+			@include btn;
+			& .nav-btn-link {
+				color: $colorWhite;
+			}
+		}
+	}
+	& .main-image-content {
+		width: 47%;
+		position: relative;
+		top: 20px;
+		right: 15px;
+		@include mq("sp") {
+			width: 100%;
+			right: 0;
+			padding-top: 45px;
+			padding-left: 45px;
+			padding-right: 45px;
+		}
+		& .main-image {
+			@include mq("tab") {
+				width: 100%;
+			}
+		}
+	}
+}
+
+// features
+.features-wrapper {
+	& .features-inner {
+		@include inner;
+		padding-top: 71px;
+		padding-bottom: 154px;
+
+		@include mq("tab") {
+			// padding-left: 20px;
+			// padding-right: 20px;
+		}
+		@include mq("sp") {
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		& .features-heading {
+			text-align: center;
+			& .features-ttl {
+				@include heading;
+				line-height: 46px;
+			}
+			& .features-lead {
+				@include lead;
+				line-height: 24px;
+				margin: 10px 0 57px 0;
+				display: inline-block;
+			}
+		}
+	}
+	& .features-menu {
+		// menu共通
+		& .menu-heading {
+			font-size: 1.75rem;
+			text-align: center;
+			margin-bottom: 49px;
+			line-height: 40px;
+		}
+		& .menu-lists {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			@include mq("tab") {
+				flex-direction: column;
+			}
+
+			& .menu-list {
+				width: 46%;
+				font-weight: bold;
+				@include mq("tab") {
+					width: 70%;
+					text-align: center;
+					margin: 0 auto;
+				}
+				@include mq("sp") {
+					width: 100%;
+				}
+				& .image {
+					@include mq("tab") {
+						width: 100%;
+					}
+					@include mq("tab") {
+						width: 80%;
+					}
+				}
+
+				& .menu-ttl {
+					font-size: 1.5rem;
+					margin-bottom: 45px;
+					line-height: 48px;
+					@include mq("tab") {
+						margin-top: 45px;
+					}
+					@include mq("sp") {
+						font-size: 1.2rem;
+					}
+				}
+				& .menu-lead {
+					font-size: 1rem;
+					line-height: 26px;
+				}
+			}
+		}
+		// menu1
+		& .text-list-1 {
+			width: 52%;
+			@include mq("tab") {
+				width: 70%;
+			}
+			@include mq("sp") {
+				width: 90%;
+			}
+		}
+		& .text-lead-1 {
+			padding-right: 100px;
+			@include mq("tab") {
+				width: 90%;
+				padding-right: 0;
+				margin: 0 auto;
+			}
+			@include mq("sp") {
+				width: 100%;
+				margin: 0;
+			}
+		}
+		// menu2
+		& .menu2-heading {
+			margin-top: 86px;
+			margin-bottom: 59px;
+			line-height: 26px;
+		}
+		& .lists-2 {
+			align-items: flex-start;
+
+			& .text-list-2 {
+				@include mq("tab") {
+					order: 2;
+				}
+			}
+		}
+		// menu3
+		& .menu3-heading {
+			margin-top: 136px;
+			margin-bottom: 62px;
+			line-height: 26px;
+		}
+		& .text-lead-3 {
+			padding-right: 110px;
+			@include mq("tab") {
+				padding: 0 40px;
+			}
+			@include mq("sp") {
+				padding: 0;
+			}
+		}
+	}
+}
+// price
+.price-wrapper {
+	background: #eefbfb 0% 0% no-repeat padding-box;
+	& .price-inner {
+		@include inner;
+		padding-top: 55px;
+		padding-bottom: 68px;
+
+		@include mq("tab") {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		// price-heading
+		& .price-heading {
+			text-align: center;
+			& .price-ttl {
+				@include heading;
+				line-height: 28px;
+				margin-bottom: 11px;
+			}
+			& .price-lead {
+				@include lead;
+				line-height: 24px;
+			}
+		}
+
+		// table
+		& .price-table {
+			max-width: 926px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border: none;
+			background-color: #fff;
+			box-shadow: 0px 3px 6px #00000029;
+			margin-top: 70px;
+			margin-bottom: 36px;
+			font-weight: bold;
+			@include mq("tab") {
+				max-width: 1022px;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			& .price-tr {
+				& .td {
+					font-size: 1rem;
+					line-height: 28px;
+					padding: 35px 19px;
+					border: 1px solid #ccc;
+					width: 27%;
+					color: $colorBlack;
+					@include mq("tab") {
+						text-align: center;
+					}
+				}
+				& .td-price {
+					width: 60%;
+					border: 1px solid #ccc;
+					font-size: 1rem;
+					line-height: 28px;
+					padding: 35px 20px;
+					color: $colorBlack;
+					vertical-align: middle;
+					@include mq("sp") {
+						text-align: center;
+					}
+				}
+			}
+		}
+		& .price-note {
+			line-height: 26px;
+			color: #444;
+			text-align: center;
+			font-weight: bold;
+		}
+	}
+}
+// よくある質問
+.question-wrapper {
+	font-weight: bold;
+	& .question-inner {
+		text-align: center;
+		@include inner;
+		margin: 0 auto;
+		padding-top: 55px;
+		padding-bottom: 86px;
+		@include mq("tab") {
+			max-width: 1022px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		& .question-ttl {
+			@include heading;
+			line-height: 28px;
+		}
+		& .question-lead {
+			@include lead;
+			margin-top: 11px;
+			margin-bottom: 32px;
+			display: inline-block;
+		}
+	}
+	& .accordion-wrapper {
+		width: 100%;
+		max-width: 907px;
+		margin: 0 auto;
+		@include mq("tab") {
+			max-width: 100%;
+		}
+		& .accordion-open {
+			border: 1px solid #e5e5e5;
+			padding: 18px 0 20px;
+			font-size: 0.875rem;
+			line-height: 26px;
+			@include mq("sp") {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+		}
+		& .accordion-close {
+			border: 1px solid #e5e5e5;
+			background-color: #f2f2f2;
+			padding: 25px 87px 25px 35px;
+			font-size: 0.875rem;
+			line-height: 26px;
+			text-align: left;
+			display: none;
+			@include mq("sp") {
+				padding: 18px 20px;
+				text-align: center;
+			}
+		}
+		& .js-Accordion-close {
+			display: block;
+		}
+	}
+}
+// blog
+.blog-wrapper {
+	background: #eefbfb 0% 0% no-repeat padding-box;
+	& .blog-inner {
+		max-width: 1227px;
+		margin: 0 auto;
+		padding: 55px 20px 91px;
+
+		@include mq("tab") {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		& .blog-heading {
+			text-align: center;
+			& .blog-ttl {
+				@include heading;
+				line-height: 28px;
+			}
+			& .blog-lead {
+				@include lead;
+				display: inline-block;
+				line-height: 24px;
+				margin-top: 11px;
+				margin-bottom: 54px;
+			}
+		}
+	}
+	& .blog-content {
+		display: flex;
+		justify-content: space-between;
+
+		@include mq("tab") {
+			flex-direction: column;
+		}
+		// align-items: center;
+		& .blog-content-list {
+			width: 100%;
+			max-width: 389px;
+			margin-right: 30px;
+			box-shadow: 0px 3px 6px #00000029;
+			background-color: #fff;
+			display: flex;
+			flex-direction: column;
+			@include mq("tab") {
+				max-width: 100%;
+				margin-bottom: 40px;
+			}
+			& .content-image {
+				& .blog-image {
+					width: 100%;
+				}
+			}
+			& .content-caption {
+				width: 100%;
+				padding: 14px 30px 35px 18px;
+				font-size: 1.125rem;
+				font-weight: bold;
+				line-height: 26px;
+				position: relative;
+				flex-grow: 1;
+				& .content-date {
+					display: block;
+					position: absolute;
+					bottom: 10px;
+					right: 32px;
+				}
+			}
+		}
+		& .lists-3 {
+			margin-right: 0;
+		}
+	}
+}
+// works
+.works-wrapper {
+	background: #fff;
+	& .works-inner {
+		padding-top: 55px;
+		padding-bottom: 90px;
+		& .works-heading {
+			text-align: center;
+			& .works-ttl {
+				@include heading;
+				line-height: 28px;
+			}
+			& .works-lead {
+				@include lead;
+				display: inline-block;
+				margin-top: 11px;
+				margin-bottom: 68px;
+			}
+		}
+	}
+	& .swiper-container {
+		width: 100%;
+		& .swiper-slide {
+			width: 100%;
+			max-width: 322px;
+			margin-right: 56px;
+			box-shadow: 0px 3px 6px #00000029;
+			background-color: #fff;
+			border: 1px solid #dddddd;
+			@include mq("tab") {
+				max-width: 68%;
+			}
+			& .content-image {
+				& .works-image {
+					width: 100%;
+				}
+			}
+			& .content-caption {
+				padding: 19px 16px 40px 18px;
+				font-size: 1rem;
+				font-weight: bold;
+				line-height: 24px;
+				position: relative;
+				& .caption-info {
+					padding-top: 30px;
+					font-size: 0.875rem;
+				}
+			}
+		}
+		& .list-5 {
+			margin-right: 0;
+		}
+	}
+}
+// contact
+.contact-wrapper {
+	background: transparent
+		linear-gradient(90deg, #05a5fa 0%, #63fbd7 100%, #67ffd6 100%) 0% 0%
+		no-repeat padding-box;
+	padding-top: 63px;
+	padding-bottom: 70px;
+	@include mq("tab") {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	& .contact-content {
+		text-align: center;
+		max-width: 280px;
+		margin: 0 auto;
+		& .contact-heading {
+			& .contact-ttl {
+				@include heading;
+				line-height: 28px;
+				color: $colorWhite;
+			}
+			& .contact-lead {
+				@include lead;
+				display: inline-block;
+				line-height: 24px;
+				color: $colorWhite;
+				margin-top: 7px;
+				margin-bottom: 36px;
+			}
+		}
+		& .contact-text {
+			font-size: 1rem;
+			line-height: 24px;
+			margin-bottom: 44px;
+			color: $colorWhite;
+		}
+	}
+	& .form-wrapper {
+		max-width: 908px;
+		margin: 0 auto;
+		background-color: $colorWhite;
+		padding: 31px 62px 35px 63px;
+		@include mq("sp") {
+			padding: 31px 35px;
+		}
+
+		& .label-box {
+			display: flex;
+			align-items: center;
+		}
+		& .label {
+			display: inline-block;
+			font-weight: bold;
+			margin-right: 23px;
+			font-size: 1rem;
+			line-height: 26px;
+			color: $colorBlack;
+		}
+		& .form-attention {
+			@include form-label;
+		}
+		& .input {
+			height: 4vh;
+			width: 100%;
+			max-width: 499px;
+			background-color: #eefbfb;
+			margin: 39px 0 27px;
+			border: none;
+		}
+		& .textarea {
+			width: 100%;
+			background-color: #eefbfb;
+			border: none;
+			margin: 39px 0 27px;
+		}
+
+		& .check-box,
+		.form-btn {
+			text-align: center;
+		}
+		& .check-box {
+			margin-bottom: 30px;
+			font-weight: bold;
+		}
+		& #js-submit {
+			@include btn;
+			max-width: 155px;
+			color: $colorWhite;
+		}
+		& .end-message {
+			display: none;
+		}
+		
+		& .false-message {
+			display: none;
+		}
+	}
+}
+
+// footer
+.footer {
+	text-align: center;
+	background-color: #f8f8f8;
+	padding: 43px 0 49px;
+
+	& .footer-ttl {
+		font-size: 1.5rem;
+		line-height: 28px;
+		color: $colorBlack;
+	}
+	& .footer-box {
+		padding: 21px 0 52px;
+		& .footer-info {
+			font-weight: bold;
+			display: inline-block;
+			margin-right: 29px;
+			font-size: 1rem;
+			line-height: 28px;
+			color: $colorBlack;
+		}
+		& .info-2 {
+			margin-right: 0;
+		}
+	}
+}
