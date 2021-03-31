@@ -315,12 +315,7 @@ $breakpoints: (
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding-left: 4%;
-		padding-right: 4%;
-
 		@include mq("tab") {
-			// padding-left: 4%;
-			// padding-right: 4%;
 		}
 		@include mq("sp") {
 			flex-direction: column;
