@@ -41,12 +41,8 @@ li {
   max-width: 1022px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-@media screen and (max-width: 899px) {
-  .header .header-inner {
-    padding: 0 20px;
-  }
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 .header .header-nav {
@@ -342,13 +338,8 @@ li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-@media screen and (max-width: 899px) {
-  .main-wrapper .main-inner {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 @media screen and (max-width: 675px) {
@@ -445,12 +436,14 @@ li {
   padding: 0 20px;
   padding-top: 71px;
   padding-bottom: 154px;
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 @media screen and (max-width: 675px) {
   .features-wrapper .features-inner {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }
 
@@ -510,7 +503,7 @@ li {
 
 @media screen and (max-width: 899px) {
   .features-wrapper .features-menu .menu-lists .menu-list {
-    width: 70%;
+    width: 80%;
     text-align: center;
     margin: 0 auto;
   }
@@ -648,8 +641,15 @@ li {
 
 @media screen and (max-width: 899px) {
   .price-wrapper .price-inner {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .price-wrapper .price-inner {
+    padding-left: 6%;
+    padding-right: 6%;
   }
 }
 
@@ -750,8 +750,15 @@ li {
 @media screen and (max-width: 899px) {
   .question-wrapper .question-inner {
     max-width: 1022px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .question-wrapper .question-inner {
+    padding-left: 6%;
+    padding-right: 6%;
   }
 }
 
@@ -826,13 +833,13 @@ li {
 .blog-wrapper .blog-inner {
   max-width: 1227px;
   margin: 0 auto;
-  padding: 55px 20px 91px;
+  padding: 55px 4% 91px;
 }
 
-@media screen and (max-width: 899px) {
+@media screen and (max-width: 675px) {
   .blog-wrapper .blog-inner {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 6%;
+    padding-right: 6%;
   }
 }
 
@@ -1006,8 +1013,15 @@ li {
 
 @media screen and (max-width: 899px) {
   .contact-wrapper {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .contact-wrapper {
+    padding-left: 6%;
+    padding-right: 6%;
   }
 }
 

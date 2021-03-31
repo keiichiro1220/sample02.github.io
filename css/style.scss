@@ -89,9 +89,10 @@ $breakpoints: (
 	background-color: $colorWhite;
 	& .header-inner {
 		@include inner;
-
+		padding-left: 4%;
+		padding-right: 4%;
 		@include mq("tab") {
-			padding: 0 20px;
+			// padding: 0 20px;
 		}
 		@include mq("sp") {
 		}
@@ -317,10 +318,12 @@ $breakpoints: (
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding-left: 4%;
+		padding-right: 4%;
 
 		@include mq("tab") {
-			padding-left: 20px;
-			padding-right: 20px;
+			// padding-left: 4%;
+			// padding-right: 4%;
 		}
 		@include mq("sp") {
 			flex-direction: column;
@@ -380,14 +383,16 @@ $breakpoints: (
 		@include inner;
 		padding-top: 71px;
 		padding-bottom: 154px;
+		padding-left: 4%;
+		padding-right: 4%;
 
 		@include mq("tab") {
 			// padding-left: 20px;
 			// padding-right: 20px;
 		}
 		@include mq("sp") {
-			padding-left: 15px;
-			padding-right: 15px;
+			padding-left: 5%;
+			padding-right: 5%;
 		}
 
 		& .features-heading {
@@ -424,7 +429,7 @@ $breakpoints: (
 				width: 46%;
 				font-weight: bold;
 				@include mq("tab") {
-					width: 70%;
+					width: 80%;
 					text-align: center;
 					margin: 0 auto;
 				}
@@ -520,8 +525,12 @@ $breakpoints: (
 		padding-bottom: 68px;
 
 		@include mq("tab") {
-			padding-left: 20px;
-			padding-right: 20px;
+			padding-left: 4%;
+			padding-right: 4%;
+		}
+		@include mq("sp") {
+			padding-left: 6%;
+			padding-right: 6%;
 		}
 		// price-heading
 		& .price-heading {
@@ -599,8 +608,12 @@ $breakpoints: (
 		padding-bottom: 86px;
 		@include mq("tab") {
 			max-width: 1022px;
-			padding-left: 20px;
-			padding-right: 20px;
+			padding-left: 4%;
+			padding-right: 4%;
+		}
+		@include mq("sp") {
+			padding-left: 6%;
+			padding-right: 6%;
 		}
 		& .question-ttl {
 			@include heading;
@@ -654,11 +667,15 @@ $breakpoints: (
 	& .blog-inner {
 		max-width: 1227px;
 		margin: 0 auto;
-		padding: 55px 20px 91px;
+		padding: 55px 4% 91px;
 
 		@include mq("tab") {
-			padding-left: 20px;
-			padding-right: 20px;
+			// padding-left: 20px;
+			// padding-right: 20px;
+		}
+		@include mq("sp") {
+			padding-left: 6%;
+			padding-right: 6%;
 		}
 		& .blog-heading {
 			text-align: center;
@@ -783,8 +800,12 @@ $breakpoints: (
 	padding-top: 63px;
 	padding-bottom: 70px;
 	@include mq("tab") {
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 4%;
+		padding-right: 4%;
+	}
+	@include mq("sp") {
+		padding-left: 6%;
+		padding-right: 6%;
 	}
 
 	& .contact-content {
