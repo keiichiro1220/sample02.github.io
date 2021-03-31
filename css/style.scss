@@ -2,7 +2,7 @@ html {
 	scroll-behavior: smooth;
 }
 body {
-	font-family: 'Noto Sans', sans-serif;
+	font-family: "Noto Sans", sans-serif;
 }
 * {
 	box-sizing: border-box;
@@ -889,7 +889,7 @@ $breakpoints: (
 		& .end-message {
 			display: none;
 		}
-		
+
 		& .false-message {
 			display: none;
 		}
