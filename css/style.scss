@@ -89,10 +89,7 @@ $breakpoints: (
 	background-color: $colorWhite;
 	& .header-inner {
 		@include inner;
-		padding-left: 4%;
-		padding-right: 4%;
 		@include mq("tab") {
-			// padding: 0 20px;
 		}
 		@include mq("sp") {
 		}
